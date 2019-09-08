@@ -1,0 +1,65 @@
+some facts you might find useful
+adding (brackets) around your regex creates a group
+i.e pattern = "((\d{2})-(\d{2})-(\d{4})"
+group 1 : (\d{2})
+group 2 : (\d{2})
+group 3 : (\d{4})
+
+How to read this?
+problems are in ordered list
+
+// Text is commented . That's where i try to clarify things and it has nothing to do with regex pattern even if they exist on same line
+--> [Regex command]
+
+
+-----------------------*-------------------------
+
+1. Word boundaries
+Check if a string contains the word word in it (case insensitive). If you have no idea, I guess you could try /word/.
+flags /gi (global and case insensitive)
+
+-->\bword\b
+
+-----------------------*-------------------------
+
+2. Capitalizing i
+Use substitution to replace every occurrence of the word i with the word I (uppercase, I as in me). E.g.: i'm replacing it. am i not? -> I'm replacing it. am I not?. A regex match is replaced with the text in the Substitution field when using substitution.
+
+flags /g
+-->\bi\b
+
+-----------------------*-------------------------
+
+3. Uppercase consonants
+With regex you can count the number of matches. Can you make it return the number of uppercase consonants (B,C,D,F,..,X,Y,Z) in a given string? E.g.: it should return 3 with the text ABcDeFO!. Note: Only ASCII. We consider Y to be a consonant! Example: the regex /./g will return 3 when run against the string abc.
+
+came up with 2 methods
+-->(?=[A-Z])(?=[^AEIOU])  //and operator
+-->(?![EIOU])[B-Z] //  (?!) same as(?=^)
+
+-----------------------*-------------------------
+
+4. Retrive numbers
+Count the number of integers in a given string. Integers are, for example: 1, 2, 65, 2579, etc.
+
+-->\d+                 // \d+ in a sense that 69 is counted as single integer instead of matcher counting 6 and 9 seperately
+-->\d{1,}
+
+-----------------------*-------------------------
+
+5. WHITESPACE
+Find all occurrences of 4 or more whitespace characters in a row throughout the string.
+
+flags \g
+-->[[:blank:]]{4,}
+
+ -----------------------*-------------------------
+
+ 6. BROKEN KEYBOARD
+Oh no! It seems my friends spilled beer all over my keyboard last night and my keys are super sticky now. Some of the time whennn I press a key, I get two duplicates. Can you ppplease help me fix thhhis?
+
+flags /g
+--> (.)\1{2}           // \1 is referred as backreference . matches string from first capture group .(repeats 3 times) helllo should be converted to hello
+substitute with $1    // returns string from the first capture group
+
+ -----------------------*-------------------------
