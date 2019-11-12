@@ -63,3 +63,24 @@ flags /g
 substitute with $1    // returns string from the first capture group
 
  -----------------------*-------------------------
+7. Validating IP
+
+--> ^(?:(?:[0-1][0-9]{2}|[2]{1}[0-4]{1}[0-9]{1}|[2][5][0-5]{1}|\b[0-9]{1}\b|\b[0-9]{2}\b)\.){3}(?:[0-1][0-9]{2}|[2]{1}[0-4]{1}[0-9]{1}|[2][5][0-5]{1}|\b[0-9]{1}\b|\b[0-9]{2}\b)$
+so how does it work?? 
+key points:
+1.ip can range from 0.0.0.0 to 255.255.255.255
+2.1.1.1.1 or 01.01.01.01 or 001.001.001.001 all are valid ip address.
+
+[0-1][0-9]{2}  == anything from 100 to 199
+
+[2]{1}[0-4]{1}[0-9]{1} == anything from 200 to 249
+
+[2][5][0-5]{1} == anything from 250 to 255
+
+\b[0-9]{1}\b == from 0 to 9 \b means whole word
+
+\b[0-9]{2}\b == from 00 to 99 \b means whole word
+
+^(?:(?:[0-1][0-9]{2}|[2]{1}[0-4]{1}[0-9]{1}|[2][5][0-5]{1}|\b[0-9]{1}\b|\b[0-9]{2}\b)\.){3} ==same case for 3 times with period sign . as \. because period sign represents anything except escape sequence characters so to match leterally a period sign \. is mandatory.
+
+
